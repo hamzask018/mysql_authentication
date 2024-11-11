@@ -1,0 +1,40 @@
+.nav-container {
+    background-color: #f0f0f0;
+    padding: 10px 20px;
+    border-radius: 25px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 35px;
+    padding: 10px 20px;
+    background-color: #e0e0e0;
+    border-radius: 15px;
+    margin: 0 auto;
+}
+
+.nav-links a {
+    color: #49557e;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.nav-button {
+    margin-left: auto;
+}
+
+.nav-button button {
+    padding: 12px 20px;
+    border-radius: 8px;
+    background-color: #49557e;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
