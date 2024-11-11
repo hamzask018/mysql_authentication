@@ -10,12 +10,9 @@ const corsOptions = {
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS']
 };
- 
-
 
 app.use(express.json());
 app.use(cors(corsOptions));
-
 
 
 const con = mysql.createConnection(
