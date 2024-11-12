@@ -1,6 +1,6 @@
 import express from 'express';
 import cors from 'cors';
-import mysql from 'mysql';
+import mysql from 'mysql2';
 
 const port = process.env.PORT || 4000;
 
@@ -17,12 +17,41 @@ app.use(cors(corsOptions));
 
 const con = mysql.createConnection(
    {
+    host: '127.0.0.1',
     user: 'root',
-    host: 'localhost',
-    password: 'hamza',
+    password: '22510115',
     database: 'userauth'
    }
 );
+
+app.get('/api/createdb', (req, res) => {
+    // SQL query to create a database
+    const createDbQuery = 'CREATE DATABASE IF NOT EXISTS userauth';
+    con.query(createDbQuery, (err, result) => {
+      if (err) throw err;
+      console.log('Database created or already exists.');
+  
+      // Use the newly created or existing database
+      con.changeUser({ database: 'userauth' }, (err) => {
+        if (err) throw err;
+  
+        // SQL query to create a table
+        const createTableQuery = `
+          CREATE TABLE IF NOT EXISTS userdata (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(255) NOT NULL,
+            email VARCHAR(255) UNIQUE NOT NULL,
+            password VARCHAR(255) NOT NULL
+          )`;
+  
+        con.query(createTableQuery, (err, result) => {
+          if (err) throw err;
+          console.log('Table created or already exists.');
+          res.send('Database and table created successfully!');
+        });
+      });
+    });
+});
 
 app.post("/api/register",(req,res)=>{
     const { name, email, password } = req.body;
